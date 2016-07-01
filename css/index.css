@@ -1,0 +1,10 @@
+#dropArea {
+    height:300px;
+    width:300px;
+    background-color:blue;
+}
+ 
+#targetImg {
+    height:50px;
+    width:50px;
+}
