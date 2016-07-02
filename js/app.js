@@ -11,7 +11,6 @@ function init() {
     document.body.appendChild(board);
     document.body.appendChild(hand);
     
-    
     var boardcontents = [
         ["香","桂","銀","金","王","金","銀","桂","香"],
         ["","飛","","","","","","角",""],
@@ -61,12 +60,19 @@ function init() {
             cell.appendChild(token);
 		}
 	}
-	
     $(function(){
-        $(".token").draggable({cursor:"move"});
+        $(".token").draggable({
+            cursor:"move",
+            grid:[44, 44]
+        });
         $(".token").on('dblclick',function(){
             this.innerText=promotionhash[this.innerText];
             this.style.color = promotioncolor[this.style.color]
+        })
+        $("#hand").droppable({
+            drop: function (e, ui) {
+                
+            }
         })
     });
 }
