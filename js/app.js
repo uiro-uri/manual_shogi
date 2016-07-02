@@ -61,17 +61,29 @@ function init() {
 		}
 	}
     $(function(){
+        var dragged = null;
         $(".token").draggable({
             cursor:"move",
-            grid:[44, 44]
+            grid:[44, 44],
+            start:function(){
+                dragged=this;
+            },
+            stop:function(){
+                dragged=null;
+            }
         });
         $(".token").on('dblclick',function(){
             this.innerText=promotionhash[this.innerText];
             this.style.color = promotioncolor[this.style.color]
         })
         $("#hand").droppable({
-            drop: function (e, ui) {
-                
+            over:function(){
+                dragged.style.transform="rotate(0deg)"
+            }
+        });
+        $("#captured").droppable({
+            over:function(){
+                dragged.style.transform="rotate(180deg)"
             }
         })
     });
