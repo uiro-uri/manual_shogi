@@ -1,10 +1,41 @@
-#dropArea {
-    height:300px;
-    width:300px;
-    background-color:blue;
+#hand {
+    height:200px;
+    width:200px;
+    border-style:solid;
+    border-width:1px;
+    margin: 5px;
+    margin-left: 200px;
+    background-color: #ffffcc;
 }
- 
-#targetImg {
-    height:50px;
-    width:50px;
+
+#captured {
+    height:200px;
+    width:200px;
+    border-style:solid;
+    border-width:1px;
+    margin: 5px;
+    background-color: #ffffcc;
 }
+
+#board {
+    border:solid 1px;
+    border-spacing: 0px;
+    background-color: #ffffcc;
+}
+
+#board td{
+    border:solid 1px;
+}
+
+#board tr{
+    border:solid 1px;
+}
+
+
+ .cell{
+     height: 40px;
+     width: 40px;
+ }
+ .token{
+     font-size: 32px;
+ }

@@ -1,8 +1,16 @@
 function init() {
     var board = document.createElement("table");
+    var hand = document.createElement("div");
+    var captured = document.createElement("div");
     var cellsize = 40;
     var promotionarea = 3;
+    board.id="board";
+    hand.id="hand";
+    captured.id="captured";
+    document.body.appendChild(captured);
     document.body.appendChild(board);
+    document.body.appendChild(hand);
+    
     
     var boardcontents = [
         ["香","桂","銀","金","王","金","銀","桂","香"],
@@ -15,6 +23,24 @@ function init() {
         ["","角","","","","","","飛",""],
         ["香","桂","銀","金","玉","金","銀","桂","香"]
     ];
+    var promotionhash = new Object;
+    promotionhash["香"]="杏";
+    promotionhash["杏"]="香";
+    promotionhash["桂"]="圭";
+    promotionhash["圭"]="桂";
+    promotionhash["銀"]="全";
+    promotionhash["全"]="銀";
+    promotionhash["金"]="金";
+    promotionhash["王"]="王";
+    promotionhash["玉"]="玉";
+    promotionhash["歩"]="と";
+    promotionhash["と"]="歩";
+    promotionhash["飛"]="龍";
+    promotionhash["龍"]="飛";
+    promotionhash["角"]="馬";
+    promotionhash["馬"]="角";
+    
+    var promotioncolor = {black:"red",red:"black"}
 
     for(var i = 0;i < boardcontents.length;++i){
         var tr = board.insertRow(-1);
@@ -27,22 +53,22 @@ function init() {
             if(i<promotionarea){
                 token.style.transform = "rotate(180deg)";
             }
-            token.style.fontSize = cellsize * 0.8;
+            token.style.color="black";
             if (boardcontents[i][j].length != 0){
                 token.appendChild(document.createTextNode(boardcontents[i][j]));
             }
             td.appendChild(cell);
             cell.appendChild(token);
-            td.height = cellsize;
-            td.width = cellsize;
 		}
 	}
 	
     $(function(){
         $(".token").draggable({cursor:"move"});
+        $(".token").on('dblclick',function(){
+            this.innerText=promotionhash[this.innerText];
+            this.style.color = promotioncolor[this.style.color]
+        })
     });
-	board.rules = "all";
-	board.frame = "box";
 }
 
  
