@@ -1,3 +1,4 @@
+
 #hand {
     height:200px;
     width:200px;
@@ -11,8 +12,7 @@
 #captured {
     height:200px;
     width:200px;
-    border-style:solid;
-    border-width:1px;
+    border:solid 1px;
     margin: 5px;
     background-color: #ffffcc;
 }
@@ -37,5 +37,8 @@
      width: 40px;
  }
  .token{
+     cursor: default;
      font-size: 32px;
  }
+ 
+.ui-selected { background: #F39814; color: white; }
