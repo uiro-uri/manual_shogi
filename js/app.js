@@ -46,24 +46,29 @@ function init() {
 		for(var j = 0;j < boardcontents[i].length;++j){
             var cell = tr.insertCell(-1);
             cell.className = "cell";
-            var token = document.createElement("div");
-            token.className = "token";
-            if(i<promotionarea){
-                token.style.transform = "rotate(180deg)";
-            }
-            token.style.color="black";
             if (boardcontents[i][j].length != 0){
+                var token = document.createElement("div");
+                token.className = "token";
+                if(i<promotionarea){
+                    token.style.transform = "rotate(180deg)";
+                }
+                token.style.color="black";
                 token.appendChild(document.createTextNode(boardcontents[i][j]));
+                cell.appendChild(token);
             }
-            cell.appendChild(token);
 		}
 	}
     $(function(){
         var selecting = null;
         $(".cell").on('click',function() {
-            this.appendChild(selecting);
-            $(selecting).css('top',0);
-            $(selecting).css('left',0);
+            console.log(this.childNodes);
+            if (this.childNodes.length==0){
+                $(selecting).removeClass("ui-selected");
+                this.appendChild(selecting);
+                $(selecting).css('top',0);
+                $(selecting).css('left',0);
+                selecting=null;
+            }
         });
         $(".cell").droppable({
             drop:function(){
@@ -72,16 +77,20 @@ function init() {
         });
         $(".token").draggable({
             start:function(){
+                console.log("start");
                 selecting=this;
             },
             stop:function(e,ui){
+                console.log("stop");
                 $(this).css('top',0);
                 $(this).css('left',0);
                 selecting=null;
             }
         });
         $(".token").on('click',function(){
+            console.log("select");
             selecting=this;
+            $(this).addClass("ui-selected");
         });
         $(".token").on('dblclick',function(){
             this.innerText=promotionhash[this.innerText];
