@@ -61,8 +61,7 @@ function init() {
     $(function(){
         var selecting = null;
         $(".cell").on('click',function() {
-            console.log(this.childNodes);
-            if (this.childNodes.length==0){
+            if (this.childNodes.length==0　&& selecting!==null){
                 $(selecting).removeClass("ui-selected");
                 this.appendChild(selecting);
                 $(selecting).css('top',0);
@@ -72,7 +71,9 @@ function init() {
         });
         $(".cell").droppable({
             drop:function(){
-                this.appendChild(selecting);
+                if (this.childNodes.length==0　&& selecting!==null){
+                    this.appendChild(selecting);
+                }
             }
         });
         $(".token").draggable({
@@ -89,6 +90,7 @@ function init() {
         });
         $(".token").on('click',function(){
             console.log("select");
+            $(selecting).removeClass("ui-selected");
             selecting=this;
             $(this).addClass("ui-selected");
         });
@@ -99,11 +101,41 @@ function init() {
         $("#hand").droppable({
             over:function(){
                 selecting.style.transform="rotate(0deg)";
+                $(selecting).removeClass("ui-selected");
+                this.appendChild(selecting);
+                $(selecting).css('top',0);
+                $(selecting).css('left',0);
+                selecting=null;
+            }
+        });
+        $("#hand").on('click',function() {
+            if (selecting!==null){
+                selecting.style.transform="rotate(0deg)";
+                $(selecting).removeClass("ui-selected");
+                this.appendChild(selecting);
+                $(selecting).css('top',0);
+                $(selecting).css('left',0);
+                selecting=null;
             }
         });
         $("#captured").droppable({
             over:function(){
                 selecting.style.transform="rotate(180deg)";
+                $(selecting).removeClass("ui-selected");
+                this.appendChild(selecting);
+                $(selecting).css('top',0);
+                $(selecting).css('left',0);
+                selecting=null;
+            }
+        });
+        $("#captured").on('click',function() {
+            if (selecting!==null){
+                selecting.style.transform="rotate(180deg)";
+                $(selecting).removeClass("ui-selected");
+                this.appendChild(selecting);
+                $(selecting).css('top',0);
+                $(selecting).css('left',0);
+                selecting=null;
             }
         });
     });

@@ -27,11 +27,6 @@
     border:solid 1px;
 }
 
-#board tr{
-    border:solid 1px;
-}
-
-
  .cell{
      height: 40px;
      width: 40px;
