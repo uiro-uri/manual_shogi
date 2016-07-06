@@ -99,13 +99,12 @@ function init() {
             this.style.color = promotioncolor[this.style.color];
         });
         $("#hand").droppable({
-            over:function(){
+            drop:function(){
                 selecting.style.transform="rotate(0deg)";
                 $(selecting).removeClass("ui-selected");
                 this.appendChild(selecting);
                 $(selecting).css('top',0);
                 $(selecting).css('left',0);
-                selecting=null;
             }
         });
         $("#hand").on('click',function() {
@@ -115,17 +114,15 @@ function init() {
                 this.appendChild(selecting);
                 $(selecting).css('top',0);
                 $(selecting).css('left',0);
-                selecting=null;
             }
         });
         $("#captured").droppable({
-            over:function(){
+            drop:function(){
                 selecting.style.transform="rotate(180deg)";
                 $(selecting).removeClass("ui-selected");
                 this.appendChild(selecting);
                 $(selecting).css('top',0);
                 $(selecting).css('left',0);
-                selecting=null;
             }
         });
         $("#captured").on('click',function() {
@@ -135,7 +132,6 @@ function init() {
                 this.appendChild(selecting);
                 $(selecting).css('top',0);
                 $(selecting).css('left',0);
-                selecting=null;
             }
         });
     });
