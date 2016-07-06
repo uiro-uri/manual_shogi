@@ -47,7 +47,7 @@ function init() {
             var cell = tr.insertCell(-1);
             cell.className = "cell";
             if (boardcontents[i][j].length != 0){
-                var token = document.createElement("div");
+                var token = document.createElement("span");
                 token.className = "token";
                 if(i<promotionarea){
                     token.style.transform = "rotate(180deg)";
@@ -61,17 +61,15 @@ function init() {
     $(function(){
         var selecting = null;
         $(".cell").on('click',function() {
-            if (this.childNodes.length==0　&& selecting!==null){
-                $(selecting).removeClass("ui-selected");
+            if (this.childNodes.length==0 && selecting!==null){
                 this.appendChild(selecting);
                 $(selecting).css('top',0);
                 $(selecting).css('left',0);
-                selecting=null;
             }
         });
         $(".cell").droppable({
             drop:function(){
-                if (this.childNodes.length==0　&& selecting!==null){
+                if (this.childNodes.length==0 && selecting!==null){
                     this.appendChild(selecting);
                 }
             }
@@ -101,7 +99,6 @@ function init() {
         $("#hand").droppable({
             drop:function(){
                 selecting.style.transform="rotate(0deg)";
-                $(selecting).removeClass("ui-selected");
                 this.appendChild(selecting);
                 $(selecting).css('top',0);
                 $(selecting).css('left',0);
@@ -110,7 +107,6 @@ function init() {
         $("#hand").on('click',function() {
             if (selecting!==null){
                 selecting.style.transform="rotate(0deg)";
-                $(selecting).removeClass("ui-selected");
                 this.appendChild(selecting);
                 $(selecting).css('top',0);
                 $(selecting).css('left',0);
@@ -119,7 +115,6 @@ function init() {
         $("#captured").droppable({
             drop:function(){
                 selecting.style.transform="rotate(180deg)";
-                $(selecting).removeClass("ui-selected");
                 this.appendChild(selecting);
                 $(selecting).css('top',0);
                 $(selecting).css('left',0);
@@ -128,7 +123,6 @@ function init() {
         $("#captured").on('click',function() {
             if (selecting!==null){
                 selecting.style.transform="rotate(180deg)";
-                $(selecting).removeClass("ui-selected");
                 this.appendChild(selecting);
                 $(selecting).css('top',0);
                 $(selecting).css('left',0);
