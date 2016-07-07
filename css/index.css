@@ -35,5 +35,13 @@
      cursor: default;
      font-size: 32px;
  }
- 
+
 .ui-selected { background: #F39814; color: white; }
+
+.yours{
+    transform: rotate(0deg);
+}
+
+.opponents{
+    transform: rotate(180deg);
+}

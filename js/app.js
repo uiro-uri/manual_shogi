@@ -2,7 +2,6 @@ function init() {
     var board = document.createElement("table");
     var hand = document.createElement("div");
     var captured = document.createElement("div");
-    var cellsize = 40;
     var promotionarea = 3;
     board.id="board";
     hand.id="hand";
@@ -39,7 +38,7 @@ function init() {
     promotionhash["角"]="馬";
     promotionhash["馬"]="角";
     
-    var promotioncolor = {black:"red",red:"black"}
+    var promotioncolor = {black:"red",red:"black"};
 
     for(var i = 0;i < boardcontents.length;++i){
         var tr = board.insertRow(-1);
@@ -47,12 +46,15 @@ function init() {
             var cell = tr.insertCell(-1);
             cell.className = "cell";
             if (boardcontents[i][j].length != 0){
-                var token = document.createElement("span");
+                var token = document.createElement("div");
                 token.className = "token";
                 if(i<promotionarea){
-                    token.style.transform = "rotate(180deg)";
+                    token.classList.add("opponents");
+                } else {
+                    token.classList.add("yours");
                 }
                 token.style.color="black";
+                token.style.display="inline-block";
                 token.appendChild(document.createTextNode(boardcontents[i][j]));
                 cell.appendChild(token);
             }
@@ -77,17 +79,17 @@ function init() {
         $(".token").draggable({
             start:function(){
                 console.log("start");
+                $(selecting).removeClass("ui-selected");
                 selecting=this;
+                $(this).addClass("ui-selected");
             },
-            stop:function(e,ui){
+            stop:function(){
                 console.log("stop");
                 $(this).css('top',0);
                 $(this).css('left',0);
-                selecting=null;
             }
         });
         $(".token").on('click',function(){
-            console.log("select");
             $(selecting).removeClass("ui-selected");
             selecting=this;
             $(this).addClass("ui-selected");
@@ -98,38 +100,37 @@ function init() {
         });
         $("#hand").droppable({
             drop:function(){
-                selecting.style.transform="rotate(0deg)";
                 this.appendChild(selecting);
                 $(selecting).css('top',0);
                 $(selecting).css('left',0);
+                selecting.classList.add("yours");
+                selecting.classList.remove("opponents");
             }
         });
         $("#hand").on('click',function() {
             if (selecting!==null){
-                selecting.style.transform="rotate(0deg)";
                 this.appendChild(selecting);
-                $(selecting).css('top',0);
-                $(selecting).css('left',0);
+                selecting.classList.add("yours");
+                selecting.classList.remove("opponents");
             }
         });
         $("#captured").droppable({
             drop:function(){
-                selecting.style.transform="rotate(180deg)";
                 this.appendChild(selecting);
                 $(selecting).css('top',0);
                 $(selecting).css('left',0);
+                selecting.classList.add("opponents");
+                selecting.classList.remove("yours");
             }
         });
         $("#captured").on('click',function() {
             if (selecting!==null){
-                selecting.style.transform="rotate(180deg)";
                 this.appendChild(selecting);
-                $(selecting).css('top',0);
-                $(selecting).css('left',0);
+                selecting.classList.add("opponents");
+                selecting.classList.remove("yours");
             }
         });
     });
 }
-
  
 window.onload = init();
