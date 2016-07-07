@@ -46,17 +46,16 @@ function init() {
             var cell = tr.insertCell(-1);
             cell.className = "cell";
             if (boardcontents[i][j].length != 0){
-                var token = document.createElement("div");
-                token.className = "token";
+                var piece = document.createElement("div");
+                piece.className = "piece";
                 if(i<promotionarea){
-                    token.classList.add("opponents");
+                    piece.classList.add("opponents");
                 } else {
-                    token.classList.add("yours");
+                    piece.classList.add("yours");
                 }
-                token.style.color="black";
-                token.style.display="inline-block";
-                token.appendChild(document.createTextNode(boardcontents[i][j]));
-                cell.appendChild(token);
+                piece.style.color="black";
+                piece.appendChild(document.createTextNode(boardcontents[i][j]));
+                cell.appendChild(piece);
             }
 		}
 	}
@@ -76,7 +75,7 @@ function init() {
                 }
             }
         });
-        $(".token").draggable({
+        $(".piece").draggable({
             start:function(){
                 console.log("start");
                 $(selecting).removeClass("ui-selected");
@@ -89,12 +88,12 @@ function init() {
                 $(this).css('left',0);
             }
         });
-        $(".token").on('click',function(){
+        $(".piece").on('click',function(){
             $(selecting).removeClass("ui-selected");
             selecting=this;
             $(this).addClass("ui-selected");
         });
-        $(".token").on('dblclick',function(){
+        $(".piece").on('dblclick',function(){
             this.innerText=promotionhash[this.innerText];
             this.style.color = promotioncolor[this.style.color];
         });
